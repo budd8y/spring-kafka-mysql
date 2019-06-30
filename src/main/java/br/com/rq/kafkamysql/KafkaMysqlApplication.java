@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.rq.kafkamysql.dao.PersonDaoImpl;
 import br.com.rq.kafkamysql.domain.Person;
+import br.com.rq.kafkamysql.kafka.producer.Producer;
 
 @SpringBootApplication
 public class KafkaMysqlApplication implements CommandLineRunner {
@@ -19,6 +20,9 @@ public class KafkaMysqlApplication implements CommandLineRunner {
 
 	@Autowired
 	private PersonDaoImpl dao;
+	
+	@Autowired
+	private Producer producer;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -29,7 +33,9 @@ public class KafkaMysqlApplication implements CommandLineRunner {
 			//dao.deletePerson(p.getId());
 		}
 		
-		
+		for (int i = 0; i < 10; i++) {
+			producer.producerPerson("{\"name\": \"Person " + i + "\", \"age\": \"35\", \"email\": \"person" + i + "@gmail.com\"}");
+		}
 		
 		System.out.println("Qtde pessoas: " + dao.getCountOfPeople());
 		
@@ -40,5 +46,6 @@ public class KafkaMysqlApplication implements CommandLineRunner {
 		//System.out.println("Add em lote= " + dao.addLotePeople(list));
 		
 	}
+	
 
 }
