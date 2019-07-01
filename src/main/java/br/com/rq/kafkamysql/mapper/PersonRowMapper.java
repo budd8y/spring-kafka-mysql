@@ -1,4 +1,4 @@
-package br.com.rq.kafkamysql.dao;
+package br.com.rq.kafkamysql.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

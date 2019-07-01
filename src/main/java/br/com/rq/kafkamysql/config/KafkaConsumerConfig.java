@@ -67,8 +67,10 @@ public class KafkaConsumerConfig {
 		return factory;
 	}
 	
+	
 	@Bean
 	public Consumer consumer() {
 		return new Consumer();
 	}
+	
 }

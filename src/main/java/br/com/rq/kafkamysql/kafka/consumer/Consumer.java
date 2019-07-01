@@ -11,15 +11,29 @@ import br.com.rq.kafkamysql.domain.Person;
 public class Consumer {
 	
 	private static final Logger log = LoggerFactory.getLogger(Consumer.class);
+	private static int COUNTER_P1 = 1;
+	private static int COUNTER_P2 = 1;
+	
 	
 	@Autowired
 	private PersonDaoImpl dao;
 	
-	@KafkaListener(topics = "${kafka.topic.person}", containerFactory = "personKafkaListenerContainerFactory")
+	/*
+	@KafkaListener(topics = "${kafka.topic.person}", containerFactory = "personKafkaListenerContainerFactory", groupId = "teste1")
 	public void consumerPerson(Person person) {
-		log.info("consumerPerson='{}'", person);
-		dao.addPerson(person);
-		System.out.println("consumerPerson={" + person + "}");
+		log.info("[==1== ("+ COUNTER_P1 +")]consumerPerson='{}'", person.getName());
+		//dao.addPerson(person);
+		System.out.println("[==1== (" + COUNTER_P1 + ")]consumerPerson={" + person.getName() + "}");
+		COUNTER_P1++;
+	}
+	*/
+	
+	
+	@KafkaListener(topics = "${kafka.topic.person}", containerFactory = "personKafkaListenerContainerFactory", groupId = "teste2")
+	public void consumerPerson2(Person person) {
+		log.info("[==2== (" + COUNTER_P2 + ")]consumerPerson2='{}'", person.getName());
+		System.out.println("[==2== (" + COUNTER_P2 + ")]consumerPerson={" + person.getName() + "}");
+		COUNTER_P2++;
 	}
 	
 }

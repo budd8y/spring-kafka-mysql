@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import br.com.rq.kafkamysql.domain.Person;
+import br.com.rq.kafkamysql.mapper.PersonRowMapper;
 
 @Repository
 public class PersonDaoImpl implements IPersonDao {

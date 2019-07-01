@@ -23,21 +23,27 @@ public class KafkaMysqlApplication implements CommandLineRunner {
 	
 	@Autowired
 	private Producer producer;
-
+	
+	private static final int QTDE_LOOP = 10;
+	private static final boolean ATIVAR_PRODUTOR = false;
+	
 	@Override
 	public void run(String... args) throws Exception {
-
+		/*
 		List<Person> list = dao.getAllPeople();
 		for (Person p : list) {
 			System.out.println(p);
 			//dao.deletePerson(p.getId());
 		}
+		*/
 		
-		for (int i = 0; i < 10; i++) {
-			producer.producerPerson("{\"name\": \"Person " + i + "\", \"age\": \"35\", \"email\": \"person" + i + "@gmail.com\"}");
+		if (ATIVAR_PRODUTOR) {
+			for (int i = 1; i <= QTDE_LOOP; i++) {
+				producer.producerPerson("{\"name\": \"Person " + i + "\", \"age\": \"35\", \"email\": \"person" + i + "@gmail.com\"}");
+			}
 		}
 		
-		System.out.println("Qtde pessoas: " + dao.getCountOfPeople());
+		//System.out.println("Qtde pessoas: " + dao.getCountOfPeople());
 		
 		//dao.updatePerson(new Person("Nova Pessoa 12", 12, "nova-pessoa-12@gmail.com"), 12);
 		
